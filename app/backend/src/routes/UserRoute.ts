@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { UserMiddleware } from '../middlewares';
 import UserController from '../controllers';
 import UserService from '../services';
 
@@ -7,6 +8,6 @@ const router = Router();
 const service = new UserService();
 const controller = new UserController(service);
 
-router.post('/', controller.login);
+router.post('/', UserMiddleware.validateFields, controller.login);
 
 export default router;
