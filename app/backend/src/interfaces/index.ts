@@ -1,3 +1,3 @@
-import { Login } from './Login';
+import { ILogin } from './Login';
 
-export default Login;
+export default ILogin;
