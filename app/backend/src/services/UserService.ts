@@ -1,6 +1,6 @@
 import ILogin from '../interfaces';
-import { createToken } from '../utils/jwtFunctions';
-// import UsersModel from '../database/models/UserModel';
+import { createToken, getHash } from '../utils';
+import UsersModel from '../database/models/UserModel';
 import UserValidation from './validations';
 
 class UsersService {
@@ -8,7 +8,11 @@ class UsersService {
     if (!UserValidation.validateUser(email, password)) {
       throw new Error('Incorrect email or password');
     }
-    // const users = await UsersModel.findAll();
+    const encryptedPassword = await getHash(password);
+    const user = await UsersModel.findOne({ where: { email, password: encryptedPassword } });
+    if (!user) {
+      throw new Error('Incorrect email or password');
+    }
     return createToken({ email });
   };
 }
