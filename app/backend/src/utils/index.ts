@@ -1,9 +1,8 @@
-import { createToken, verifyToken } from './jwtFunctions';
+import JwtFunctions from './JwtFunctions';
 import { getCompare, getHash } from './bCryptFunctions';
 
 export {
-  createToken,
-  verifyToken,
+  JwtFunctions,
   getCompare,
   getHash,
 };
