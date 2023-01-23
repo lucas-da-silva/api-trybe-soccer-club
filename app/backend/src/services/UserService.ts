@@ -1,9 +1,9 @@
-import { ILogin } from '../interfaces';
+import { IRole, ILogin, IUserService } from '../interfaces';
 import { JwtFunctions } from '../utils';
 import UserValidation from './validations';
 import UserModel from '../database/models/UserModel';
 
-class UserService {
+class UserService implements IUserService {
   login = async ({ email, password }: ILogin): Promise<string | null> => {
     if (!await UserValidation.validateUser(email, password)) {
       throw new Error('Incorrect email or password');
@@ -11,7 +11,7 @@ class UserService {
     return JwtFunctions.create({ email });
   };
 
-  validate = async (email: string): Promise<{ role: string } | null> => {
+  validate = async (email: string): Promise<IRole | null> => {
     const role = UserModel.findOne({ where: { email }, attributes: ['role'] });
     if (!role) throw new Error('Invalid token');
     return role;

@@ -1,10 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { JwtFunctions } from '../utils';
-import { UserService } from '../services';
-import { IToken } from '../interfaces';
+import { IToken, IUserService } from '../interfaces';
 
 class UserController {
-  constructor(private userService: UserService) {}
+  constructor(private userService: IUserService) {}
 
   public login = async (
     req: Request,
