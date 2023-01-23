@@ -6,7 +6,7 @@ import chaiHttp = require('chai-http');
 import { app } from '../app';
 import MatchModel from '../database/models/MatchModel';
 import { Response } from 'superagent';
-import { matchesFilteredMock, matchesMock } from './mocks/match.mock';
+import { matchesInProgress, matches, matchesFinished } from './mocks/match.mock';
 
 chai.use(chaiHttp);
 
@@ -19,9 +19,11 @@ describe('Tests for match route', () => {
     sinon
       .stub(MatchModel, 'findAll')
       .onCall(0)
-      .resolves(matchesMock as MatchModel[])
+      .resolves(matches as MatchModel[])
       .onCall(1)
-      .resolves(matchesFilteredMock as MatchModel[]);
+      .resolves(matchesInProgress as MatchModel[])
+      .onCall(3)
+      .resolves(matchesFinished as MatchModel[]);
   });
 
   after(() => {
@@ -31,12 +33,12 @@ describe('Tests for match route', () => {
   it('The /matches endpoint correctly returns match data', async () => {
     chaiHttpResponse = await chai.request(app).get('/matches');
     const { body } = chaiHttpResponse;
-    expect(body).to.be.deep.equal(matchesMock);
+    expect(body).to.be.deep.equal(matches);
   });
 
   it('The /matches endpoint returns matches in progress in a filtered way', async () => {
-    chaiHttpResponse = await chai.request(app).get('/matches').query({ inProgress: true });
+    chaiHttpResponse = await chai.request(app).get('/matches').query({ inProgress: false });
     const { body } = chaiHttpResponse;
-    expect(body).to.be.deep.equal(matchesFilteredMock);
+    expect(body).to.be.deep.equal(matchesFinished);
   });
 });
