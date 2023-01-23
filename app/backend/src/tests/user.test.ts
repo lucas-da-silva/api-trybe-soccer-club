@@ -57,4 +57,17 @@ describe('Tests for user route', () => {
     const { body: { message } } = chaiHttpResponse;
     expect(message).to.be.equal(EMAIL_PASSWORD_ERROR);
   });
+
+  it('The /login/validate endpoint returns the data correctly', async () => {
+    chaiHttpResponse = await chai
+      .request(app)
+      .get('/login/validate')
+      .set('Authorization', tokenMock)
+      .send({
+        email: VALID_EMAIL,
+        password: VALID_PASSWORD,
+      });
+    const { body: { role } } = chaiHttpResponse;
+    expect(role).to.be.equal(userMock.role);
+  });
 });
