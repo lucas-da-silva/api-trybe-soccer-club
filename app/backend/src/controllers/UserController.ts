@@ -16,6 +16,19 @@ class UserController {
       next(error);
     }
   };
+
+  public validate = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const role = await this.userService.validate(req.body.user);
+      res.status(200).json(role);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default UserController;
