@@ -1,3 +1,4 @@
-import userRoutes from './UserRoute';
+import userRoute from './UserRoute';
+import teamRoute from './TeamRoute';
 
-export default userRoutes;
+export { userRoute, teamRoute };
