@@ -1,5 +1,6 @@
 import * as sinon from 'sinon';
 import * as chai from 'chai';
+import { StatusCodes } from 'http-status-codes';
 // @ts-ignore
 import chaiHttp = require('chai-http');
 
@@ -37,8 +38,10 @@ describe('Tests for user route', () => {
     });
     const {
       body: { token },
+      status,
     } = chaiHttpResponse;
-    expect(token).to.be.exist;
+
+    expect(status).to.be.equal(StatusCodes.OK);
     expect(typeof token).to.be.equal('string');
   });
 
@@ -46,7 +49,10 @@ describe('Tests for user route', () => {
     chaiHttpResponse = await chai.request(app).post('/login').send({});
     const {
       body: { message },
+      status
     } = chaiHttpResponse;
+
+    expect(status).to.be.equal(StatusCodes.BAD_REQUEST);
     expect(message).to.be.equal(FIELDS_ERROR);
   });
 
@@ -57,7 +63,10 @@ describe('Tests for user route', () => {
     });
     const {
       body: { message },
+      status
     } = chaiHttpResponse;
+
+    expect(status).to.be.equal(StatusCodes.UNAUTHORIZED);
     expect(message).to.be.equal(EMAIL_PASSWORD_ERROR);
   });
 
@@ -67,7 +76,9 @@ describe('Tests for user route', () => {
       password: VALID_PASSWORD,
     });
 
-    const { body: { token } } = chaiHttpResponse;
+    const {
+      body: { token },
+    } = chaiHttpResponse;
 
     chaiHttpResponse = await chai
       .request(app)
@@ -78,7 +89,12 @@ describe('Tests for user route', () => {
         password: VALID_PASSWORD,
       });
 
-    const { body: { role } } = chaiHttpResponse;
+    const {
+      body: { role },
+      status
+    } = chaiHttpResponse;
+
+    expect(status).to.be.equal(StatusCodes.OK);
     expect(role).to.be.equal(userMock.role);
   });
 });
