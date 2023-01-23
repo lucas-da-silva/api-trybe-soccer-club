@@ -1,5 +1,5 @@
 import { sign, verify } from 'jsonwebtoken';
-import { IData } from './interfaces/Token';
+import { IData } from '../interfaces/Token';
 
 const secret = process.env.JWT_SECRET || 'mySecret';
 

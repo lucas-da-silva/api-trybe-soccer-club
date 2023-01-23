@@ -1,4 +1,3 @@
-// import { genSalt, hash, compare } from 'bcryptjs';
 import { genSalt, hash, compare } from 'bcryptjs';
 
 const getHash = async (data: string): Promise<string> => {
