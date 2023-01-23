@@ -2,7 +2,7 @@ import { ILogin } from './Login';
 import { IUser, IRole, IUserService } from './User';
 import { IData, IToken } from './Token';
 import { ITeam, ITeamService } from './Team';
-import { IMatch, IMatchIncludes } from './Match';
+import { IMatch, IMatchWithTeamName } from './Match';
 
 export {
   ILogin,
@@ -14,5 +14,5 @@ export {
   IUserService,
   ITeamService,
   IMatch,
-  IMatchIncludes,
+  IMatchWithTeamName,
 };

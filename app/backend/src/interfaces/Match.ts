@@ -7,7 +7,7 @@ export interface IMatch {
   inProgress: boolean;
 }
 
-export interface IMatchIncludes extends IMatch {
+export interface IMatchWithTeamName extends IMatch {
   homeTeam: {
     teamName: string;
   };
