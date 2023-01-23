@@ -1,5 +1,5 @@
 import UserModel from '../../database/models/UserModel';
-import { getCompare } from '../../utils';
+import { BCryptFunctions } from '../../utils';
 import { IUser } from '../../interfaces';
 
 class UserValidation {
@@ -12,7 +12,7 @@ class UserValidation {
     if (password.length < 6) return false;
     const user: IUser | null = await UserModel.findOne({ where: { email } });
     if (!user) return false;
-    const passwordIsValid = await getCompare(password, user.password);
+    const passwordIsValid = await BCryptFunctions.compare(password, user.password);
     if (!passwordIsValid) return false;
     return true;
   }

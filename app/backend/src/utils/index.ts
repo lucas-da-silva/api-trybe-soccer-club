@@ -1,4 +1,4 @@
 import JwtFunctions from './JwtFunctions';
-import { getCompare, getHash } from './bCryptFunctions';
+import BCryptFunctions from './BCryptFunctions';
 
-export { JwtFunctions, getCompare, getHash };
+export { JwtFunctions, BCryptFunctions };
