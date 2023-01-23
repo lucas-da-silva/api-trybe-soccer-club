@@ -7,8 +7,6 @@ export const userMock = {
   // senha: secret_admin
 };
 
-export const tokenMock = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0sImlhdCI6MTY3NDQ4MzkzMSwiZXhwIjoxNjc0NDg3NTMxfQ.yjx3ZGFYaUUv1jlwAsnOhHcAj-odjTPCpagHHOWpQ6c';
-
 export const VALID_EMAIL = userMock.email;
 export const VALID_PASSWORD = 'secret_admin';
 export const INVALID_EMAIL = 'email';

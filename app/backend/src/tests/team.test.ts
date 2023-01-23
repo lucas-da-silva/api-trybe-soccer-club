@@ -28,12 +28,12 @@ describe('Tests for team route', () => {
   it('The /teams endpoint returns all teams correctly', async () => {
     chaiHttpResponse = await chai.request(app).get('/teams');
     const { body } = chaiHttpResponse;
-    expect(body).to.be.equal(teamsMock);
+    expect(body).to.be.deep.equal(teamsMock);
   });
 
   it('The /teams/:id endpoint return data for a specific team', async () => {
     chaiHttpResponse = await chai.request(app).get('/teams/:1');
     const { body } = chaiHttpResponse;
-    expect(body).to.be.equal(teamMock);
+    expect(body).to.be.deep.equal(teamMock);
   });
 });
