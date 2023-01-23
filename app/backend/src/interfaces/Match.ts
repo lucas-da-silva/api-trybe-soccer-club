@@ -15,3 +15,7 @@ export interface IMatchWithTeamName extends IMatch {
     teamName: string;
   };
 }
+
+export interface IMatchService {
+  getAll(inProgress: string | undefined): Promise<IMatchWithTeamName[]>
+}

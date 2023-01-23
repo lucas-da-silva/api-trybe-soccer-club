@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { MatchService } from '../services';
+import { IMatchService } from '../interfaces';
 
 class MatchController {
-  constructor(private matchService: MatchService) {}
+  constructor(private matchService: IMatchService) {}
 
   public getAll = async (req: Request, res: Response) => {
     const { inProgress } = req.query;

@@ -1,8 +1,8 @@
-// import { IMatchIncludes } from '../interfaces';
+import { IMatchService, IMatchWithTeamName } from '../interfaces';
 import MatchModel from '../database/models/MatchModel';
 import TeamModel from '../database/models/TeamModel';
 
-class MatchService {
+class MatchService implements IMatchService {
   getAll = async (inProgress: string | undefined) => {
     let matches;
     const includeTeamName = [
@@ -16,10 +16,12 @@ class MatchService {
         include: includeTeamName,
       });
     } else {
-      matches = await MatchModel.findAll({ include: includeTeamName });
+      matches = await MatchModel.findAll({
+        include: includeTeamName,
+      });
     }
 
-    return matches;
+    return matches as unknown as IMatchWithTeamName[];
   };
 }
 
