@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { IToken } from '../interfaces';
-import { verifyToken } from '../utils';
+import { JwtFunctions } from '../utils';
 
 class TokenMiddleware {
   public static validate(
@@ -11,7 +11,7 @@ class TokenMiddleware {
     const token = req.header('Authorization');
     if (!token) throw new Error('Token not found');
     try {
-      const decoded = verifyToken(token) as IToken;
+      const decoded = JwtFunctions.verify(token) as IToken;
       req.body.user = decoded.data.email;
       return next();
     } catch (err) {

@@ -1,5 +1,5 @@
 import { ILogin } from '../interfaces';
-import { createToken } from '../utils';
+import { JwtFunctions } from '../utils';
 import UserValidation from './validations';
 import UserModel from '../database/models/UserModel';
 
@@ -8,7 +8,7 @@ class UserService {
     if (!await UserValidation.validateUser(email, password)) {
       throw new Error('Incorrect email or password');
     }
-    return createToken({ email });
+    return JwtFunctions.create({ email });
   };
 
   validate = async (email: string): Promise<{ role: string } | null> => {
