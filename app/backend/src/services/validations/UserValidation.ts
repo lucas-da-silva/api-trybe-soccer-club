@@ -1,5 +1,6 @@
 import UserModel from '../../database/models/UserModel';
 import { getCompare } from '../../utils';
+import { IUser } from '../../interfaces';
 
 class UserValidation {
   public static validateEmail(email: string): boolean {
@@ -9,7 +10,7 @@ class UserValidation {
 
   public static async validatePassword(password: string, email: string): Promise<boolean> {
     if (password.length < 6) return false;
-    const user = await UserModel.findOne({ where: { email } });
+    const user: IUser | null = await UserModel.findOne({ where: { email } });
     if (!user) return false;
     const passwordIsValid = await getCompare(password, user.password);
     if (!passwordIsValid) return false;

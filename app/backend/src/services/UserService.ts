@@ -1,6 +1,7 @@
-import ILogin from '../interfaces';
+import { ILogin } from '../interfaces';
 import { createToken } from '../utils';
 import UserValidation from './validations';
+import UserModel from '../database/models/UserModel';
 
 class UsersService {
   login = async ({ email, password }: ILogin): Promise<string> => {
@@ -8,6 +9,12 @@ class UsersService {
       throw new Error('Incorrect email or password');
     }
     return createToken({ email });
+  };
+
+  validate = async (email: string) => {
+    const role = UserModel.findOne({ where: { email }, attributes: ['role'] });
+    if (!role) throw new Error('Invalid token');
+    return role;
   };
 }
 

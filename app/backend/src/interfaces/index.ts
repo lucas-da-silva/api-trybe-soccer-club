@@ -1,3 +1,7 @@
 import { ILogin } from './Login';
+import { IUser } from './User';
 
-export default ILogin;
+export {
+  ILogin,
+  IUser,
+};
