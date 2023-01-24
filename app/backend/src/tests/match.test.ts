@@ -5,6 +5,7 @@ import chaiHttp = require('chai-http');
 
 import { app } from '../app';
 import MatchModel from '../database/models/MatchModel';
+import TeamModel from '../database/models/TeamModel';
 import { Response } from 'superagent';
 import {
   matchesInProgress,
@@ -18,6 +19,7 @@ import {
 } from './mocks/match.mock';
 import { VALID_EMAIL, VALID_PASSWORD } from './mocks/user.mock';
 import { StatusCodes } from 'http-status-codes';
+import { teamMock } from './mocks/team.mock';
 
 chai.use(chaiHttp);
 
@@ -36,6 +38,7 @@ describe('Tests for match route', () => {
       .resolves(matchesInProgress as unknown as MatchModel[])
       .onCall(2)
       .resolves(matchesFinished as unknown as MatchModel[]);
+    sinon.stub(MatchModel, 'create').resolves(newMatchCreated as MatchModel);
 
     token = await chai
       .request(app)
@@ -121,7 +124,7 @@ describe('Tests for match route', () => {
     );
   });
 
-  it('In the /matches endpoint it is not possible to insert a match with a team that does not exist', async () => {
+  it('In the /matches endpoint it is not possible to insert a match with a team that does not exist', async () => {    
     chaiHttpResponse = await chai
       .request(app)
       .post('/matches')
@@ -137,18 +140,20 @@ describe('Tests for match route', () => {
   });
 
   it('In the /matches endpoint unable to insert a match without a valid token', async () => {
+    token = '';
+    
     chaiHttpResponse = await chai
       .request(app)
       .post('/matches')
       .set('Authorization', '')
-      .send(matchWithTeamInvalid);
+      .send(newMatch);
     const {
       body: { message },
       status,
     } = chaiHttpResponse;
 
     expect(status).to.be.equal(StatusCodes.UNAUTHORIZED);
-    expect(message).to.be.deep.equal('There is no team with such id!');
+    expect(message).to.be.deep.equal('Token must be a valid token');
   });
 
   it('In the endpoint /matches/:id it is possible to update matches in progress', async () => {
