@@ -10,5 +10,6 @@ const controller = new MatchController(service);
 
 router.get('/', controller.getAll);
 router.post('/', TokenMiddleware.validate, controller.create);
+router.patch('/:id/finish', controller.finish);
 
 export default router;
