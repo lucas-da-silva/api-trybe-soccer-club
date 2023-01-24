@@ -26,7 +26,7 @@ class MatchController {
   public update = async (req: Request, res: Response) => {
     const id = Number(req.params.id);
     await this.matchService.update(id, req.body);
-    res.status(StatusCodes.OK).end();
+    res.status(StatusCodes.OK).json({ message: 'Updated' });
   };
 }
 
