@@ -1,3 +1,5 @@
+import { IError } from './Error';
+
 export interface IMatch {
   homeTeamId: number;
   homeTeamGoals: number;
@@ -10,6 +12,11 @@ export interface IMatchFromDB extends IMatch {
   inProgress: boolean;
 }
 
+export interface INewMatch {
+  status: null;
+  message: IMatchFromDB;
+}
+
 export interface IMatchWithTeamName extends IMatchFromDB {
   homeTeam: {
     teamName: string;
@@ -20,7 +27,7 @@ export interface IMatchWithTeamName extends IMatchFromDB {
 }
 
 export interface IMatchService {
-  getAll(inProgress: string | undefined): Promise<IMatchWithTeamName[]>
-  create(match: IMatch): Promise<IMatchFromDB>
-  finish(id: number): Promise<void>
+  getAll(inProgress: string | undefined): Promise<IMatchWithTeamName[]>;
+  create(match: IMatch): Promise<INewMatch | IError>;
+  finish(id: number): Promise<void>;
 }

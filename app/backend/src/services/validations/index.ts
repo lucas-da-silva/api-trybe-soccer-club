@@ -1,3 +1,4 @@
 import UserValidation from './UserValidation';
+import MatchValidation from './MatchValidation';
 
-export default UserValidation;
+export { UserValidation, MatchValidation };
