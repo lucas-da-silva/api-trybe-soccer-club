@@ -21,4 +21,5 @@ export interface IMatchWithTeamName extends IMatchFromDB {
 
 export interface IMatchService {
   getAll(inProgress: string | undefined): Promise<IMatchWithTeamName[]>
+  create(match: IMatch): Promise<IMatchFromDB>
 }
