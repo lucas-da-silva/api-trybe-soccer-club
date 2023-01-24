@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { JwtFunctions } from '../utils';
-import { IToken, IUserService } from '../interfaces';
+import { IUserService } from '../interfaces';
 
 class UserController {
   constructor(private userService: IUserService) {}
@@ -23,10 +22,8 @@ class UserController {
     res: Response,
     next: NextFunction,
   ) => {
-    const token = req.header('Authorization') as string;
-    const { data: { email } } = JwtFunctions.verify(token) as IToken;
     try {
-      const role = await this.userService.validate(email);
+      const role = await this.userService.validate(req.body.user);
       res.status(200).json(role);
     } catch (error) {
       next(error);
