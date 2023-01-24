@@ -1,4 +1,4 @@
-import { IMatchService, IMatchWithTeamName } from '../interfaces';
+import { IMatch, IMatchFromDB, IMatchService, IMatchWithTeamName } from '../interfaces';
 import MatchModel from '../database/models/MatchModel';
 import TeamModel from '../database/models/TeamModel';
 
@@ -22,6 +22,28 @@ class MatchService implements IMatchService {
     }
 
     return matches as unknown as IMatchWithTeamName[];
+  };
+
+  getById = async (id: number) => {
+    const match = await MatchModel.findOne({ where: { id } });
+    return match;
+  };
+
+  create = async ({
+    homeTeamId,
+    awayTeamId,
+    homeTeamGoals,
+    awayTeamGoals,
+  }: IMatch): Promise<IMatchFromDB> => {
+    const newMatch = await MatchModel.create({
+      homeTeamId,
+      awayTeamId,
+      homeTeamGoals,
+      awayTeamGoals,
+      inProgress: true,
+    });
+    const match = await this.getById(newMatch.id) as IMatchFromDB;
+    return match;
   };
 }
 
