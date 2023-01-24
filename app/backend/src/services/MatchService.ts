@@ -33,13 +33,22 @@ class MatchService implements IMatchService {
   };
 
   create = async ({
-    homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals,
+    homeTeamId,
+    homeTeamGoals,
+    awayTeamId,
+    awayTeamGoals,
   }: IMatch): Promise<INewMatch | IError> => {
-    const teamsAreInvalid = await MatchValidation.validate(homeTeamId, awayTeamId);
+    const teamsAreInvalid = await MatchValidation.validate(
+      homeTeamId,
+      awayTeamId,
+    );
     if (teamsAreInvalid.status) return teamsAreInvalid;
-
     const newMatch = await MatchModel.create({
-      homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals, inProgress: true,
+      homeTeamId,
+      homeTeamGoals,
+      awayTeamId,
+      awayTeamGoals,
+      inProgress: true,
     });
     return { status: null, message: newMatch };
   };
@@ -48,8 +57,14 @@ class MatchService implements IMatchService {
     await MatchModel.update({ inProgress: false }, { where: { id } });
   };
 
-  update = async (id: number, { homeTeamGoals, awayTeamGoals }: IMatchScore) => {
-    await MatchModel.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+  update = async (
+    id: number,
+    { homeTeamGoals, awayTeamGoals }: IMatchScore,
+  ): Promise<void> => {
+    await MatchModel.update(
+      { homeTeamGoals, awayTeamGoals },
+      { where: { id } },
+    );
   };
 }
 

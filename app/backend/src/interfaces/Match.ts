@@ -33,4 +33,5 @@ export interface IMatchService {
   getAll(inProgress: string | undefined): Promise<IMatchWithTeamName[]>;
   create(match: IMatch): Promise<INewMatch | IError>;
   finish(id: number): Promise<void>;
+  update(id: number, matchScrore: IMatchScore): Promise<void>;
 }
