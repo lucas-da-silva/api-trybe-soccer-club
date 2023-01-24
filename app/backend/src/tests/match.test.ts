@@ -159,10 +159,10 @@ describe('Tests for match route', () => {
   it('In the endpoint /matches/:id it is possible to update matches in progress', async () => {
     chaiHttpResponse = await chai
       .request(app)
-      .patch('/matches/:id')
+      .patch('/matches/1')
       .send(updateMatch);
     const { status } = chaiHttpResponse;
 
-    expect(status).to.be.equal(StatusCodes.UNAUTHORIZED);
+    expect(status).to.be.equal(StatusCodes.OK);
   });
 });
