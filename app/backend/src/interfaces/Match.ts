@@ -1,10 +1,13 @@
 import { IError } from './Error';
 
-export interface IMatch {
-  homeTeamId: number;
+export interface IMatchScore {
   homeTeamGoals: number;
-  awayTeamId: number;
   awayTeamGoals: number;
+}
+
+export interface IMatch extends IMatchScore {
+  homeTeamId: number;
+  awayTeamId: number;
 }
 
 export interface IMatchFromDB extends IMatch {

@@ -4,6 +4,7 @@ import {
   IMatchService,
   INewMatch,
   IMatchWithTeamName,
+  IMatchScore,
 } from '../interfaces';
 import MatchModel from '../database/models/MatchModel';
 import TeamModel from '../database/models/TeamModel';
@@ -45,6 +46,10 @@ class MatchService implements IMatchService {
 
   finish = async (id: number): Promise<void> => {
     await MatchModel.update({ inProgress: false }, { where: { id } });
+  };
+
+  update = async (id: number, { homeTeamGoals, awayTeamGoals }: IMatchScore) => {
+    await MatchModel.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
   };
 }
 

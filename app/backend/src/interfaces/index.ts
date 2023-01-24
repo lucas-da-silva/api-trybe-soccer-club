@@ -8,6 +8,7 @@ import {
   IMatchService,
   IMatchFromDB,
   INewMatch,
+  IMatchScore,
 } from './Match';
 import { IError } from './Error';
 
@@ -26,4 +27,5 @@ export {
   IMatchFromDB,
   IError,
   INewMatch,
+  IMatchScore,
 };
