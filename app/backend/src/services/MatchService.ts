@@ -31,11 +31,6 @@ class MatchService implements IMatchService {
     return matches as unknown as IMatchWithTeamName[];
   };
 
-  getById = async (id: number) => {
-    const match = await MatchModel.findOne({ where: { id } });
-    return match;
-  };
-
   create = async ({
     homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals,
   }: IMatch): Promise<INewMatch | IError> => {
