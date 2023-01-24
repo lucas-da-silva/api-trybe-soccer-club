@@ -5,7 +5,7 @@ import UserModel from '../database/models/UserModel';
 
 class UserService implements IUserService {
   login = async ({ email, password }: ILogin): Promise<string | null> => {
-    if (!await UserValidation.validateUser(email, password)) {
+    if (!await UserValidation.validate(email, password)) {
       throw new Error('Incorrect email or password');
     }
     return JwtFunctions.create({ email });

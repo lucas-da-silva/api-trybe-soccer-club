@@ -17,7 +17,7 @@ class UserValidation {
     return true;
   }
 
-  public static async validateUser(email: string, password: string): Promise<boolean> {
+  public static async validate(email: string, password: string): Promise<boolean> {
     return (
       this.validateEmail(email)
       && await this.validatePassword(password, email)
