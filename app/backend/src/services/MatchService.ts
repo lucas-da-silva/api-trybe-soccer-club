@@ -1,11 +1,13 @@
 import {
+  IError,
   IMatch,
-  IMatchFromDB,
   IMatchService,
+  INewMatch,
   IMatchWithTeamName,
 } from '../interfaces';
 import MatchModel from '../database/models/MatchModel';
 import TeamModel from '../database/models/TeamModel';
+import { MatchValidation } from './validations';
 
 class MatchService implements IMatchService {
   getAll = async (inProgress: string | undefined) => {
@@ -35,20 +37,15 @@ class MatchService implements IMatchService {
   };
 
   create = async ({
-    homeTeamId,
-    homeTeamGoals,
-    awayTeamId,
-    awayTeamGoals,
-  }: IMatch): Promise<IMatchFromDB> => {
+    homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals,
+  }: IMatch): Promise<INewMatch | IError> => {
+    const teamsAreInvalid = await MatchValidation.validate(homeTeamId, awayTeamId);
+    if (teamsAreInvalid.status) return teamsAreInvalid;
+
     const newMatch = await MatchModel.create({
-      homeTeamId,
-      homeTeamGoals,
-      awayTeamId,
-      awayTeamGoals,
-      inProgress: true,
+      homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals, inProgress: true,
     });
-    const match = (await this.getById(newMatch.id)) as IMatchFromDB;
-    return match;
+    return { status: null, message: newMatch };
   };
 
   finish = async (id: number): Promise<void> => {

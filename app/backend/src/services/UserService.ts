@@ -1,6 +1,6 @@
 import { IRole, ILogin, IUserService } from '../interfaces';
 import { JwtFunctions } from '../utils';
-import UserValidation from './validations';
+import { UserValidation } from './validations';
 import UserModel from '../database/models/UserModel';
 
 class UserService implements IUserService {

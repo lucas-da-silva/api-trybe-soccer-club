@@ -12,8 +12,9 @@ class MatchController {
   };
 
   public create = async (req: Request, res: Response) => {
-    const newMatch = await this.matchService.create(req.body);
-    res.status(StatusCodes.CREATED).json(newMatch);
+    const { status, message } = await this.matchService.create(req.body);
+    if (status) return res.status(status).json({ message });
+    res.status(StatusCodes.CREATED).json(message);
   };
 
   public finish = async (req: Request, res: Response) => {
