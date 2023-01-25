@@ -8,5 +8,6 @@ const service = new LeaderboardService();
 const controller = new LeaderboardController(service);
 
 router.get('/home', controller.getHomeTeams);
+router.get('/away', controller.getAwayTeams);
 
 export default router;
