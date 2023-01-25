@@ -4,7 +4,7 @@ import { LeaderboardService } from '../services';
 class LeaderboardController {
   constructor(private leaderboardSevice: LeaderboardService) {}
 
-  public getHomeTeams = async (req: Request, res: Response) => {
+  public getHomeTeams = async (_req: Request, res: Response) => {
     const leaderboardHomeTeams = await this.leaderboardSevice.getHomeTeams();
     res.status(200).json(leaderboardHomeTeams);
   };
