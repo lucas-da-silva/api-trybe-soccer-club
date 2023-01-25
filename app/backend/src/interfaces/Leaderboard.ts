@@ -1,8 +1,13 @@
 import { IMatchScore } from './Match';
 
-export interface ITeamWithMatches {
+export interface IHomeTeamMatches {
   teamName: string;
   homeMatches: IMatchScore[];
+}
+
+export interface IAwayTeamMatches {
+  teamName: string;
+  awayMatches: IMatchScore[];
 }
 
 export interface ILeaderboard {

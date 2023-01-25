@@ -1,4 +1,4 @@
-import { ITeamWithMatches } from '../interfaces';
+import { IHomeTeamMatches, IAwayTeamMatches } from '../interfaces';
 import MatchModel from '../database/models/MatchModel';
 import TeamModel from '../database/models/TeamModel';
 import { LeaderboardFormat } from '../utils';
@@ -13,8 +13,8 @@ class LeaderboardService {
         attributes: ['homeTeamGoals', 'awayTeamGoals'],
       },
       attributes: ['teamName'],
-    })) as unknown as ITeamWithMatches[];
-    const leaderboard = LeaderboardFormat.format(teams);
+    })) as unknown as IHomeTeamMatches[];
+    const leaderboard = LeaderboardFormat.format(teams, 'home');
     return leaderboard;
   };
 
@@ -27,9 +27,9 @@ class LeaderboardService {
         attributes: ['homeTeamGoals', 'awayTeamGoals'],
       },
       attributes: ['teamName'],
-    })) as unknown as ITeamWithMatches[];
-    // const leaderboard = LeaderboardFormat.format(teams);
-    return teams;
+    })) as unknown as IAwayTeamMatches[];
+    const leaderboard = LeaderboardFormat.format(teams, 'away');
+    return leaderboard;
   };
 }
 
