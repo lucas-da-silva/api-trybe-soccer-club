@@ -1,4 +1,5 @@
 import JwtFunctions from './JwtFunctions';
 import BCryptFunctions from './BCryptFunctions';
+import LeaderboardFormat from './LeaderboardFormat';
 
-export { JwtFunctions, BCryptFunctions };
+export { JwtFunctions, BCryptFunctions, LeaderboardFormat };
