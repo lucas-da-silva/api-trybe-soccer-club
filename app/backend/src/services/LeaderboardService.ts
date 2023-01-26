@@ -1,9 +1,14 @@
-import { IHomeTeamMatches, IAwayTeamMatches, ILeaderboard } from '../interfaces';
+import {
+  IHomeTeamMatches,
+  IAwayTeamMatches,
+  ILeaderboard,
+  ILeaderboardService,
+} from '../interfaces';
 import MatchModel from '../database/models/MatchModel';
 import TeamModel from '../database/models/TeamModel';
 import { LeaderboardFormat } from '../utils';
 
-class LeaderboardService {
+class LeaderboardService implements ILeaderboardService {
   private homeMatches = {
     model: MatchModel,
     as: 'homeMatches',
@@ -20,7 +25,7 @@ class LeaderboardService {
 
   private teamName = 'teamName';
 
-  getLeaderboard = async (): Promise<ILeaderboard[]> => {
+  getLeaderboard = async () => {
     const teams = (await TeamModel.findAll({
       include: [this.homeMatches, this.awayMatches],
       attributes: [this.teamName],
