@@ -1,4 +1,4 @@
-import { IHomeTeamMatches, IAwayTeamMatches } from '../interfaces';
+import { IHomeTeamMatches, IAwayTeamMatches, ILeaderboard } from '../interfaces';
 import MatchModel from '../database/models/MatchModel';
 import TeamModel from '../database/models/TeamModel';
 import { LeaderboardFormat } from '../utils';
@@ -20,7 +20,7 @@ class LeaderboardService {
 
   private teamName = 'teamName';
 
-  getLeaderboard = async () => {
+  getLeaderboard = async (): Promise<ILeaderboard[]> => {
     const teams = (await TeamModel.findAll({
       include: [this.homeMatches, this.awayMatches],
       attributes: [this.teamName],
@@ -28,7 +28,7 @@ class LeaderboardService {
     return LeaderboardFormat.format(teams);
   };
 
-  getLeaderboardHome = async () => {
+  getLeaderboardHome = async (): Promise<ILeaderboard[]> => {
     const teams = (await TeamModel.findAll({
       include: this.homeMatches,
       attributes: [this.teamName],
@@ -36,7 +36,7 @@ class LeaderboardService {
     return LeaderboardFormat.format(teams, 'home');
   };
 
-  getLeaderboardAway = async () => {
+  getLeaderboardAway = async (): Promise<ILeaderboard[]> => {
     const teams = (await TeamModel.findAll({
       include: this.awayMatches,
       attributes: [this.teamName],
