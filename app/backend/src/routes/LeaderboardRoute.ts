@@ -7,6 +7,7 @@ const router = Router();
 const service = new LeaderboardService();
 const controller = new LeaderboardController(service);
 
+router.get('/', controller.getTeams);
 router.get('/home', controller.getHomeTeams);
 router.get('/away', controller.getAwayTeams);
 

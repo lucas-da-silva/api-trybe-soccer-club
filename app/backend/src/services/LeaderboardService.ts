@@ -31,6 +31,20 @@ class LeaderboardService {
     const leaderboard = LeaderboardFormat.format(teams, 'away');
     return leaderboard;
   };
+
+  getTeams = async () => {
+    const teams = (await TeamModel.findAll({
+      include: {
+        model: MatchModel,
+        as: 'homeMatches',
+        where: { inProgress: false },
+        attributes: ['homeTeamGoals', 'awayTeamGoals'],
+      },
+      attributes: ['teamName'],
+    })) as unknown as IAwayTeamMatches[];
+    // const leaderboard = LeaderboardFormat.format(teams, 'away');
+    return teams;
+  };
 }
 
 export default LeaderboardService;
