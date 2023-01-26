@@ -20,7 +20,15 @@ class LeaderboardService {
 
   private teamName = 'teamName';
 
-  getHomeTeams = async () => {
+  getLeaderboard = async () => {
+    const teams = (await TeamModel.findAll({
+      include: [this.homeMatches, this.awayMatches],
+      attributes: [this.teamName],
+    })) as unknown as IAwayTeamMatches[];
+    return LeaderboardFormat.format(teams);
+  };
+
+  getLeaderboardHome = async () => {
     const teams = (await TeamModel.findAll({
       include: this.homeMatches,
       attributes: [this.teamName],
@@ -28,20 +36,12 @@ class LeaderboardService {
     return LeaderboardFormat.format(teams, 'home');
   };
 
-  getAwayTeams = async () => {
+  getLeaderboardAway = async () => {
     const teams = (await TeamModel.findAll({
       include: this.awayMatches,
       attributes: [this.teamName],
     })) as unknown as IAwayTeamMatches[];
     return LeaderboardFormat.format(teams, 'away');
-  };
-
-  getTeams = async () => {
-    const teams = (await TeamModel.findAll({
-      include: [this.homeMatches, this.awayMatches],
-      attributes: [this.teamName],
-    })) as unknown as IAwayTeamMatches[];
-    return LeaderboardFormat.format(teams);
   };
 }
 
