@@ -11,7 +11,12 @@ import {
   IMatchScore,
 } from './Match';
 import { IError } from './Error';
-import { IHomeTeamMatches, IAwayTeamMatches, ILeaderboard } from './Leaderboard';
+import {
+  IHomeTeamMatches,
+  IAwayTeamMatches,
+  ILeaderboard,
+  ITeamMatches,
+} from './Leaderboard';
 
 export {
   ILogin,
@@ -32,4 +37,5 @@ export {
   IHomeTeamMatches,
   IAwayTeamMatches,
   ILeaderboard,
+  ITeamMatches,
 };

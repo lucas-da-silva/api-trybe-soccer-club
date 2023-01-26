@@ -10,6 +10,8 @@ export interface IAwayTeamMatches {
   awayMatches: IMatchScore[];
 }
 
+export interface ITeamMatches extends IHomeTeamMatches, IAwayTeamMatches {}
+
 export interface ILeaderboard {
   name: string;
   totalPoints: number;
@@ -19,6 +21,6 @@ export interface ILeaderboard {
   totalLosses: number;
   goalsFavor: number;
   goalsOwn: number;
-  goalsBalance: number
+  goalsBalance: number;
   efficiency: number;
 }
