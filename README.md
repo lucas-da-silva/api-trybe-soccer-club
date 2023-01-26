@@ -6,8 +6,6 @@ The API was developed using TypeScript following the principles of SOLID and OOP
 
 ## Demonstration
 
-Insira um gif ou um link de alguma demonstração
-
 ## Functionalities
 
 - Login
@@ -67,10 +65,10 @@ Running the tests
 
 ## Stack used
 
-**Full-stack:** Docker
+**Full-stack:** [Docker](https://www.docker.com/)
 
-**Front-end:** React, axios
+**Front-end:** [React](https://reactjs.org/), [axios](https://axios-http.com/)
 
-**Back-end:** Typescript, Sequelize, Sinon.JS, Chai, JSON Web Token, bcrypt
+**Back-end:** [Typescript](https://www.typescriptlang.org/), [Express](https://expressjs.com/), [Sequelize](https://sequelize.org/), [Sinon.JS](https://sinonjs.org/), [Chai](https://www.chaijs.com/), [JWT](https://jwt.io/), [bcrypt](https://www.npmjs.com/package/bcrypt)
 
-**Database:** MySQL
+**Database:** [MySQL](https://www.mysql.com/)
