@@ -24,3 +24,9 @@ export interface ILeaderboard {
   goalsBalance: number;
   efficiency: number;
 }
+
+export interface ILeaderboardService {
+  getLeaderboard(): Promise<ILeaderboard[]>
+  getLeaderboardHome(): Promise<ILeaderboard[]>
+  getLeaderboardAway(): Promise<ILeaderboard[]>
+}

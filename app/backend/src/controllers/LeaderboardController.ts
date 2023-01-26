@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { LeaderboardService } from '../services';
+import { ILeaderboardService } from '../interfaces';
 
 class LeaderboardController {
-  constructor(private leaderboardSevice: LeaderboardService) {}
+  constructor(private leaderboardSevice: ILeaderboardService) {}
 
   public getLeaderboard = async (_req: Request, res: Response) => {
     const leaderboard = await this.leaderboardSevice.getLeaderboard();

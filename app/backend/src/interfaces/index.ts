@@ -16,6 +16,7 @@ import {
   IAwayTeamMatches,
   ILeaderboard,
   ITeamMatches,
+  ILeaderboardService,
 } from './Leaderboard';
 
 export {
@@ -38,4 +39,5 @@ export {
   IAwayTeamMatches,
   ILeaderboard,
   ITeamMatches,
+  ILeaderboardService,
 };
