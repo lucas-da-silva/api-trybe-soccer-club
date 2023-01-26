@@ -19,7 +19,6 @@ import {
 } from './mocks/match.mock';
 import { VALID_EMAIL, VALID_PASSWORD } from './mocks/user.mock';
 import { StatusCodes } from 'http-status-codes';
-import { teamMock } from './mocks/team.mock';
 
 chai.use(chaiHttp);
 
