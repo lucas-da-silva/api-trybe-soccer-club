@@ -2,9 +2,11 @@
 
 In this repository there is a Full Stack application, from back-end to front-end, and the front-end was developed by [Trybe](https://github.com/tryber). I was responsible for the development of the API (using TDD), database and application integration through docker-compose.
 
-The API was developed using TypeScript following the principles of SOLID and OOP, Sequelize for data modeling, sinon and chai for creation and test stubs.
+The API was developed using TypeScript following the principles of SOLID and POO, Sequelize for data modeling, sinon and chai for creation and test stubs.
 
 ## Demonstration
+
+![Alt Text](./tfc.gif)
 
 ## Functionalities
 
