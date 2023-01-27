@@ -6,7 +6,7 @@ The API was developed using TypeScript following the principles of SOLID and POO
 
 ## Demonstration
 
-![Alt Text](./tfc.gif)
+![Alt Text](./tfc-2.gif)
 
 ## Functionalities
 
