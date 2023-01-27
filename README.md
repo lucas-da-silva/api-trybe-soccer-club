@@ -65,8 +65,10 @@ Running the tests
 Request body
 
 ```json
-  email: user@user.com, // Be valid and in the database
-  password: secret_user, // Size greater than 6 and match the email
+{
+  "email": "user@user.com", // Be valid and in the database
+  "password": "secret_user", // Size greater than 6 and match the email
+}
 ```
 
 Response body
