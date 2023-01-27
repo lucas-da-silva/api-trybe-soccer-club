@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import { ILeaderboardService } from '../interfaces';
 
 class LeaderboardController {
@@ -6,17 +7,17 @@ class LeaderboardController {
 
   public getLeaderboard = async (_req: Request, res: Response) => {
     const leaderboard = await this.leaderboardSevice.getLeaderboard();
-    res.status(200).json(leaderboard);
+    res.status(StatusCodes.OK).json(leaderboard);
   };
 
   public getLeaderboardHome = async (_req: Request, res: Response) => {
     const leaderboardHome = await this.leaderboardSevice.getLeaderboardHome();
-    res.status(200).json(leaderboardHome);
+    res.status(StatusCodes.OK).json(leaderboardHome);
   };
 
   public getLeaderboardAway = async (_req: Request, res: Response) => {
     const leaderboardAway = await this.leaderboardSevice.getLeaderboardAway();
-    res.status(200).json(leaderboardAway);
+    res.status(StatusCodes.OK).json(leaderboardAway);
   };
 }
 
