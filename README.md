@@ -54,9 +54,9 @@ Running the tests
 
 ## API documentation
 
-### Users and Login
+<!-- ## Users and Login -->
 
-#### Returns a login token
+### Returns a login token
 
 ```http
    POST /login
@@ -77,7 +77,7 @@ Response body
 }
 ```
 
-#### Returns role
+### Returns role
 
 ```http
   GET /login/validate
@@ -94,9 +94,9 @@ Response body
 { "role": "admin" }
 ```
 
-### Teams
+<!-- ### Teams -->
 
-#### Returns all teams
+### Returns all teams
 
 ```http
   GET /teams
@@ -114,7 +114,7 @@ Response body
 ]
 ```
 
-#### Returns a team
+### Returns a team
 
 ```http
   GET /teams/${id}
@@ -133,9 +133,9 @@ Response body
   },
 ```
 
-### Matches
+<!-- ### Matches -->
 
-#### Returns all matches including team name
+### Returns all matches including team name
 
 ```http
   GET /matches
@@ -169,7 +169,7 @@ Response body
 ]
 ```
 
-#### Create a new match
+### Create a new match
 
 ```http
   POST /matches
@@ -204,7 +204,7 @@ Response body
 }
 ```
 
-#### Update matches in progress
+### Update matches in progress
 
 ```http
   PATCH /matches/${id}
@@ -229,7 +229,7 @@ Response body
 { "message": "Updated" }
 ```
 
-#### Finish a match
+### Finish a match
 
 ```http
   PATCH /matches/${id}/finished
@@ -245,9 +245,9 @@ Response body
 { "message": "Finished" }
 ```
 
-### Leaderboards
+<!-- ### Leaderboards -->
 
-#### Team ranking
+### Team ranking
 
 ```http
   GET /leaderboard
@@ -273,7 +273,7 @@ Response body
 ]
 ```
 
-#### Ranking of teams with home games
+### Ranking of teams with home games
 
 ```http
   GET /leaderboard/home
@@ -299,7 +299,7 @@ Response body
 ]
 ```
 
-#### Ranking of teams with away games
+### Ranking of teams with away games
 
 ```http
   GET /leaderboard/away
