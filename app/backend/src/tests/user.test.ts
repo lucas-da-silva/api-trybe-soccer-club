@@ -14,6 +14,7 @@ import {
   userMock,
   VALID_EMAIL,
   VALID_PASSWORD,
+  INVALID_PASSWORD,
 } from './mocks/user.mock';
 
 chai.use(chaiHttp);
@@ -56,10 +57,37 @@ describe('Tests for user route', () => {
     expect(message).to.be.equal(FIELDS_ERROR);
   });
 
+  it('The /login endpoint does not allow access without informing an password', async () => {
+    chaiHttpResponse = await chai.request(app).post('/login').send({
+      email: VALID_EMAIL
+    });
+    const {
+      body: { message },
+      status
+    } = chaiHttpResponse;
+
+    expect(status).to.be.equal(StatusCodes.BAD_REQUEST);
+    expect(message).to.be.equal(FIELDS_ERROR);
+  });
+
   it('The /login endpoint does not allow access with an invalid email', async () => {
     chaiHttpResponse = await chai.request(app).post('/login').send({
       email: INVALID_EMAIL,
       password: VALID_PASSWORD,
+    });
+    const {
+      body: { message },
+      status
+    } = chaiHttpResponse;
+
+    expect(status).to.be.equal(StatusCodes.UNAUTHORIZED);
+    expect(message).to.be.equal(EMAIL_PASSWORD_ERROR);
+  });
+
+  it('The /login endpoint does not allow access with an invalid password', async () => {
+    chaiHttpResponse = await chai.request(app).post('/login').send({
+      email: VALID_EMAIL,
+      password: INVALID_PASSWORD,
     });
     const {
       body: { message },
