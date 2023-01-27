@@ -38,6 +38,13 @@ Upload the containers e install the dependencies (required [docker-compose](http
 
 The frontend is configured for port: [3000](http://localhost:3000/leaderboard)
 
+Stop the containers
+
+```bash
+  npm run compose:down
+```
+
+
 ## Running the tests
 
 Enter the backend container with the following command
