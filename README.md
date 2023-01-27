@@ -54,16 +54,268 @@ Running the tests
 
 ## API documentation
 
-<!-- #### Returns a login token
+#### Returns a login token
 
 ```http
    POST /login
 ```
 
-| Parameter   | Tipo     | Descrição                                                        |
-| :---------- | :------- | :--------------------------------------------------------------- |
-| `email`     | `string` | **Obrigatório**. Be valid (`email@email.co`) and in the database |
-| `passoword` | `string` | **Obrigatório**. Size greater than 6 and match the email         | -->
+Request body
+
+```json
+  email: user@user.com // Be valid and in the database
+  password: secret_user // Size greater than 6 and match the email
+```
+
+Response body
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0NTI3MTg5fQ.XS_9AA82iNoiVaASi0NtJpqOQ_gHSHhxrpIdigiT-fc" // Token generated.
+}
+```
+
+#### Returns role
+
+```http
+  GET /login/validate
+```
+
+In the header
+
+| Authorization | token (created in the previous route) |
+| :------------ | :------------------------------------ |
+
+Response body
+
+```json
+{ "role": "admin" }
+```
+
+#### Returns all teams
+
+```http
+  GET /teams
+```
+
+Response body
+
+```json
+[
+  {
+    "id": 1,
+    "teamName": "Avaí/Kindermann"
+  },
+  ...
+]
+```
+
+#### Returns a team
+
+```http
+  GET /teams/${id}
+```
+
+| Parameter | Type     | Description                           |
+| :-------- | :------- | :------------------------------------ |
+| `id`      | `number` | **Required**. The ID to time you want |
+
+Response body
+
+```json
+  {
+    "id": 1,
+    "teamName": "Avaí/Kindermann"
+  },
+```
+
+#### Returns all matches including team name
+
+```http
+  GET /matches
+```
+
+This route can use query string as a parameter
+
+| Parameter    | Type      | Description                                                                 |
+| :----------- | :-------- | :-------------------------------------------------------------------------- |
+| `inProgress` | `boolean` | **Optional**. Used to filter ongoing (`true`) or finished (`false`) matches |
+
+Response body
+
+```json
+[
+  {
+    "id": 1,
+    "homeTeamId": 16,
+    "homeTeamGoals": 1,
+    "awayTeamId": 8,
+    "awayTeamGoals": 1,
+    "inProgress": false,
+    "homeTeam": {
+      "teamName": "São Paulo"
+    },
+    "awayTeam": {
+      "teamName": "Grêmio"
+    }
+  },
+  ...
+]
+```
+
+#### Create a new match
+
+```http
+  POST /matches
+```
+
+In the header
+
+| Authorization | token (created in `POST /login`) |
+| :------------ | :------------------------------- |
+
+Request body
+
+```json
+{
+  "homeTeamId": 16, // The value must be the team id
+  "awayTeamId": 8, // The value must be the team id
+  "homeTeamGoals": 2,
+  "awayTeamGoals": 2
+}
+```
+
+Response body
+
+```json
+{
+  "id": 1,
+  "homeTeamId": 16,
+  "homeTeamGoals": 2,
+  "awayTeamId": 8,
+  "awayTeamGoals": 2,
+  "inProgress": true
+}
+```
+
+#### Update matches in progress
+
+```http
+  PATCH /matches/${id}
+```
+
+| Parameter | Type     | Description                                   |
+| :-------- | :------- | :-------------------------------------------- |
+| `id`      | `number` | **Required**. The match ID you want to update |
+
+Request boby
+
+```json
+{
+  "homeTeamGoals": 3,
+  "awayTeamGoals": 1
+}
+```
+
+Response body
+
+```json
+{ "message": "Updated" }
+```
+
+#### Finish a match
+
+```http
+  PATCH /matches/${id}/finished
+```
+
+| Parameter | Type     | Description                                       |
+| :-------- | :------- | :------------------------------------------------ |
+| `id`      | `number` | **Required**. The ID of the match you want to end |
+
+Response body
+
+```json
+{ "message": "Finished" }
+```
+
+#### Team ranking
+
+```http
+  GET /leaderboard
+```
+
+Response body
+
+```json
+[
+  {
+    "name": "Palmeiras",
+    "totalPoints": 13,
+    "totalGames": 5,
+    "totalVictories": 4,
+    "totalDraws": 1,
+    "totalLosses": 0,
+    "goalsFavor": 17,
+    "goalsOwn": 5,
+    "goalsBalance": 12,
+    "efficiency": "86.67"
+  },
+  ...
+]
+```
+
+#### Ranking of teams with home games
+
+```http
+  GET /leaderboard/home
+```
+
+Response body
+
+```json
+[
+  {
+    "name": "Santos",
+    "totalPoints": 9,
+    "totalGames": 3,
+    "totalVictories": 3,
+    "totalDraws": 0,
+    "totalLosses": 0,
+    "goalsFavor": 9,
+    "goalsOwn": 3,
+    "goalsBalance": 6,
+    "efficiency": "100.00"
+  },
+  ...
+]
+```
+
+#### Ranking of teams with away games
+
+```http
+  GET /leaderboard/away
+```
+
+Response body
+
+```json
+[
+  {
+    "name": "Palmeiras",
+    "totalPoints": 6,
+    "totalGames": 2,
+    "totalVictories": 2,
+    "totalDraws": 0,
+    "totalLosses": 0,
+    "goalsFavor": 7,
+    "goalsOwn": 0,
+    "goalsBalance": 7,
+    "efficiency": "100.00"
+  },
+  ...
+]
+```
 
 ## Stack used
 
