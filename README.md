@@ -54,6 +54,8 @@ Running the tests
 
 ## API documentation
 
+### Users and Login
+
 #### Returns a login token
 
 ```http
@@ -63,8 +65,8 @@ Running the tests
 Request body
 
 ```json
-  email: user@user.com // Be valid and in the database
-  password: secret_user // Size greater than 6 and match the email
+  email: user@user.com, // Be valid and in the database
+  password: secret_user, // Size greater than 6 and match the email
 ```
 
 Response body
@@ -91,6 +93,8 @@ Response body
 ```json
 { "role": "admin" }
 ```
+
+### Teams
 
 #### Returns all teams
 
@@ -128,6 +132,8 @@ Response body
     "teamName": "Avaí/Kindermann"
   },
 ```
+
+### Matches
 
 #### Returns all matches including team name
 
@@ -238,6 +244,8 @@ Response body
 ```json
 { "message": "Finished" }
 ```
+
+### Leaderboards
 
 #### Team ranking
 
