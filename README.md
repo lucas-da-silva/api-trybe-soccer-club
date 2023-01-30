@@ -6,7 +6,7 @@ The API was developed using TypeScript following the principles of SOLID and POO
 
 ## Demonstration
 
-![Alt Text](./tfc-2.gif)
+![Viewing the application: going through the login, matches and leaderboard routes.](./tfc-2.gif)
 
 ## Functionalities
 
